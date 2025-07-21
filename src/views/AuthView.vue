@@ -14,10 +14,6 @@
         <n-form-item label="Password">
           <n-input v-model:value="credentials.password" type="password" placeholder="Enter your password" />
         </n-form-item>
-
-        <n-button type="primary" block :loading="loading" @click="onSubmit">
-          {{ isRegister ? 'Register' : 'Login' }}
-        </n-button>
       </n-form>
     </n-card>
   </div>
@@ -55,11 +51,7 @@ const onSubmit = async () => {
 
   loading.value = true
   try {
-    if (isRegister.value) {
-      await storeAuth.registerUser(credentials)
-    } else {
-      await storeAuth.logInUser(credentials)
-    }
+    await storeAuth.logInUser(credentials)
   } finally {
     loading.value = false
   }
