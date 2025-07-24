@@ -1,10 +1,6 @@
 <template>
   <div class="min-h-screen flex items-center justify-center p-4 bg-gray-50">
     <n-card class="w-full max-w-md" title="Take Note">
-      <n-tabs v-model:value="tab" type="segment">
-        <n-tab-pane name="login" tab="Login" />
-        <n-tab-pane name="register" tab="Register" />
-      </n-tabs>
 
       <n-form @submit.prevent="onSubmit" class="mt-4">
         <n-form-item label="Username">
@@ -14,6 +10,10 @@
         <n-form-item label="Password">
           <n-input v-model:value="credentials.password" type="password" placeholder="Enter your password" />
         </n-form-item>
+
+        <n-button type="primary" block :loading="loading" @click="onSubmit">
+          Login
+        </n-button>
       </n-form>
     </n-card>
   </div>
