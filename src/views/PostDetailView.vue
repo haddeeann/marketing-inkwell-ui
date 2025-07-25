@@ -5,7 +5,14 @@
       <n-tag class="mb-4" :type="post?.published ? 'success' : 'warning'" size="small" round>
         {{ post?.published ? 'Published' : 'Unpublished' }}
       </n-tag>
-      <n-button @click="editPost">Edit</n-button>
+      <n-button
+        v-if="isLoggedIn && post.author_id === storeAuth.user.id"
+        @click="goToBlogEdit(post.id)"
+        type="primary"
+      >
+        Edit
+      </n-button>
+
       <div
         v-if="post"
         class="prose max-w-none text-gray-800"
@@ -33,6 +40,10 @@ interface Post {
 const router = useRouter()
 const route = useRoute()
 const post = ref<Post | null>(null)
+
+const storeAuth = useStoreAuth()
+const isLoggedIn = computed(() => !!storeAuth.accessToken)
+
 
 function sanitize(content: string) {
   return DOMPurify.sanitize(content)
