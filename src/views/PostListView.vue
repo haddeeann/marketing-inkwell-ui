@@ -11,6 +11,9 @@
         <n-tag class="mb-4" :type="post.published ? 'success' : 'warning'" size="small" round>
           {{ post.published ? 'Published' : 'Unpublished' }}
         </n-tag>
+        <div class="my-2">
+          <n-tag type="info" size="small" round v-for="tag in post.tags" class="mr-2 mb-2">{{ tag }}</n-tag>
+        </div>
         <div class="text-gray-700 cursor-pointer mb-4" @click="goToBlogDetail(post.id)">
           <div>{{ getExcerpt(post.content) }}</div>
           <div>Created: {{formatDate(post.created_at)}}</div>
