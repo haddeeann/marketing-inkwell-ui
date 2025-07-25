@@ -22,6 +22,12 @@
         >
           Unpublish Post
         </n-button>
+        <div class="my-2">
+          <n-form-item label="Tags">
+            <n-dynamic-tags v-model:value="tags" />
+          </n-form-item>
+        </div>
+
         <n-form-item>
           <text-editor v-model="content" />
         </n-form-item>
@@ -55,6 +61,7 @@ const router = useRouter()
 const title = ref('')
 const content = ref('')
 const published = ref('')
+const tags = ref<string[]>([])
 
 // Load post on mount
 onMounted(async () => {
@@ -63,6 +70,7 @@ onMounted(async () => {
   published.value = post.published
   title.value = post.title
   content.value = post.content
+  tags.value = post.tags
 })
 
 const handlePublishClicked = async () => {
@@ -82,6 +90,7 @@ const handleUpdateClicked = async () => {
   await updatePost(id, {
     title: title.value,
     content: content.value,
+    tags: tags.value
   })
   await router.push('/posts')
 }
