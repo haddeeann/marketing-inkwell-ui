@@ -24,11 +24,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { NH1, NSpace, NEmpty, NTag, NButton } from 'naive-ui'
 import DOMPurify from 'dompurify'
 import { fetchPostById } from '@/api/posts'
+import { useStoreAuth } from '@/stores/storeAuth'
 
 interface Post {
   id: number
@@ -55,9 +56,7 @@ function editPost() {
 
 onMounted(async () => {
   const id = Number(route.params.id)
-  if (!isNaN(id)) {
-    post.value = await fetchPostById(id)
-  }
+  post.value = await fetchPostById(id)
 })
 </script>
 

@@ -20,7 +20,8 @@ export async function deletePost(id: number) {
 }
 
 export async function fetchPostById(id: number) {
-  const res = await axios.get(`/api/posts/${id}/`)
+  // allow the backend to determine if we get a post detail
+  const res = await axios_public.get(`/api/posts/${id}/`)
   return res.data
 }
 
