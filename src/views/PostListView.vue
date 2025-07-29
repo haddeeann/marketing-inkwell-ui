@@ -1,7 +1,6 @@
 <template>
   <main class="p-6 max-w-3xl mx-auto">
     <n-space vertical size="large">
-      <n-h1>Blog Posts</n-h1>
       <n-card
         v-for="post in storePosts.userPosts"
         :key="post.id"
