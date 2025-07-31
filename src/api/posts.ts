@@ -1,5 +1,6 @@
 import axios from '@/api/axios'
 import axios_public from '@/api/axios_public'
+import { useStoreAuth } from '@/stores/storeAuth'
 
 export async function fetchPostsByAuthor(authorId: number) {
   const res = await axios.get(`/api/posts/?author=${authorId}`)
@@ -20,8 +21,10 @@ export async function deletePost(id: number) {
 }
 
 export async function fetchPostById(id: number) {
+  const storeAuth = useStoreAuth()
+  const client = !storeAuth.accessToken ? axios : axios_public
   // allow the backend to determine if we get a post detail
-  const res = await axios_public.get(`/api/posts/${id}/`)
+  const res = await client.get(`/api/posts/${id}/`)
   return res.data
 }
 

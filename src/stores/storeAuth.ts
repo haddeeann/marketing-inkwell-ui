@@ -17,6 +17,9 @@ export const useStoreAuth = defineStore('storeAuth', {
   state: () => ({
     user: null as User | null,
   }),
+  getters: {
+    isLoggedIn: (state) => !!state.user,
+  },
   actions: {
     async registerUser(credentials: Credentials): Promise<boolean> {
       try {
