@@ -22,7 +22,7 @@ export async function deletePost(id: number) {
 
 export async function fetchPostById(id: number) {
   const storeAuth = useStoreAuth()
-  const client = !storeAuth.accessToken ? axios : axios_public
+  const client = storeAuth.isLoggedIn ? axios : axios_public
   // allow the backend to determine if we get a post detail
   const res = await client.get(`/api/posts/${id}/`)
   return res.data
