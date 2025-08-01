@@ -8,12 +8,13 @@
         ref="noteInput"
       />
       <div class="flex justify-end mt-4">
-        <button
+        <base-button
+          type="primary"
           :disabled="!newNote"
           @click="addNote"
         >
           Add Note
-        </button>
+        </base-button>
       </div>
     </base-card>
 
@@ -36,6 +37,7 @@ import Note from '@/components/Note.vue'
 import { useStoreNotes } from '@/stores/storeNotes'
 import { useWatchCharacters } from '@/use/useWatchCharacters'
 import BaseCard from '@/components/BaseCard.vue'
+import BaseButton from '@/components/BaseButton.vue'
 
 const storeNotes = useStoreNotes()
 const newNote = ref('')

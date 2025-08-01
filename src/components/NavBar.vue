@@ -22,7 +22,6 @@
       </div>
       <base-button
         type="primary"
-        size="large"
         v-if="storeAuth.user"
         @click="storeAuth.logOutUser">
         Sign Out
@@ -30,7 +29,6 @@
       <RouterLink v-else to="/auth">
         <base-button
           type="primary"
-          size="large"
         >
           Sign In
         </base-button>

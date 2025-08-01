@@ -5,12 +5,13 @@
       <base-tag class="mb-4" :type="post.published ? 'success' : 'warning'" size="small" round>
         {{ post.published ? 'Published' : 'Unpublished' }}
       </base-tag>
-      <button
+      <base-button
+        type="primary"
         v-if="isLoggedIn && post.author_id === storeAuth.user?.id"
         @click="goToBlogEdit()"
       >
         Edit
-      </button>
+      </base-button>
       <div
         class="prose max-w-none text-gray-800"
         v-html="sanitize(post.content)"
@@ -27,6 +28,7 @@ import DOMPurify from 'dompurify'
 import { fetchPostById } from '@/api/posts'
 import { useStoreAuth } from '@/stores/storeAuth'
 import BaseTag from '@/components/BaseTag.vue'
+import BaseButton from '@/components/BaseButton.vue'
 
 interface Post {
   id: number

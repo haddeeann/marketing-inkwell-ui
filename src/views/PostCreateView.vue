@@ -32,20 +32,18 @@
         <!-- Actions -->
         <div class="flex justify-end gap-2 mt-4">
           <router-link to="/">
-            <button
-              type="button"
-              class="rounded bg-gray-200 px-4 py-2 font-medium text-gray-800 hover:bg-gray-300"
+            <base-button
+              type="secondary"
             >
               Cancel
-            </button>
+            </base-button>
           </router-link>
-          <button
-            type="submit"
+          <base-button
+            type="primary"
             :disabled="!title || !content"
-            class="rounded bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700 disabled:opacity-50"
           >
             Create Post
-          </button>
+          </base-button>
         </div>
       </form>
     </base-card>
@@ -58,6 +56,7 @@ import { useRouter } from 'vue-router'
 import { createPost } from '@/api/posts'
 import TextEditor from '@/components/TextEditor.vue'
 import BaseCard from '@/components/BaseCard.vue'
+import BaseButton from '@/components/BaseButton.vue'
 
 const router = useRouter()
 const title = ref('')
