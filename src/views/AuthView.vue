@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen flex items-center justify-center p-4 bg-gray-50">
-    <n-card class="w-full max-w-md" title="Take Note">
+    <card class="w-full max-w-md" title="Take Note">
 
       <n-form @submit.prevent="onSubmit" class="mt-4">
         <n-form-item label="Username">
@@ -15,7 +15,7 @@
           Login
         </n-button>
       </n-form>
-    </n-card>
+    </card>
   </div>
 </template>
 

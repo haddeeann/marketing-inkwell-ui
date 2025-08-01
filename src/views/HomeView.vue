@@ -1,7 +1,7 @@
 <template>
   <main class="p-6 max-w-3xl mx-auto">
     <n-space vertical size="large">
-      <n-card
+      <card
         v-for="post in storePosts.publishedPosts"
         :key="post.id"
         :title="post.title"
@@ -16,7 +16,7 @@
           <div>Created: {{formatDate(post.created_at)}}</div>
           <div>Author: {{post.author}}</div>
         </div>
-      </n-card>
+      </card>
     </n-space>
   </main>
 </template>

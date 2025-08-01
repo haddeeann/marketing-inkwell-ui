@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen flex items-start justify-center p-4 bg-gray-50">
-    <n-card class="w-full max-w-2xl" title="New Post">
+    <card class="w-full max-w-2xl" title="New Post">
       <n-form>
         <n-form-item label="Title">
           <n-input v-model:value="title" placeholder="Enter post title..." />
@@ -21,7 +21,7 @@
           </n-button>
         </div>
       </n-form>
-    </n-card>
+    </card>
   </div>
 </template>
 

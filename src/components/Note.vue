@@ -1,5 +1,5 @@
 <template>
-  <n-card :title="formatDate(note.date)" class="mb-4 shadow-sm">
+  <card :title="formatDate(note.date)" class="mb-4 shadow-sm">
     <div class="text-base pb-4 whitespace-pre-wrap">
       {{ note.content }}
     </div>
@@ -18,7 +18,7 @@
         </n-button>
       </div>
     </template>
-  </n-card>
+  </card>
 </template>
 
 <script setup lang="ts">

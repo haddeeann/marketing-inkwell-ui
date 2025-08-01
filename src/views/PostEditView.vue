@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen flex items-start justify-center p-4 bg-gray-50">
-    <n-card class="w-full max-w-2xl" title="Edit Post">
+    <card class="w-full max-w-2xl" title="Edit Post">
       <n-tag class="mb-4" :type="published ? 'success' : 'warning'" size="small" round>
         {{ published ? 'Published' : 'Unpublished' }}
       </n-tag>
@@ -44,7 +44,7 @@
           </n-button>
         </div>
       </n-form>
-    </n-card>
+    </card>
   </div>
 </template>
 

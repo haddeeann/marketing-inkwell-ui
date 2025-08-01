@@ -1,7 +1,7 @@
 <template>
   <main class="p-6 max-w-3xl mx-auto">
     <n-space vertical size="large">
-      <n-card
+      <card
         v-for="post in storePosts.userPosts"
         :key="post.id"
         :title="post.title"
@@ -28,7 +28,7 @@
             </n-button>
           </div>
         </div>
-      </n-card>
+      </card>
     </n-space>
   </main>
 </template>
