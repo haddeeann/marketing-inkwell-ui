@@ -11,7 +11,8 @@ export type Post = {
   published: boolean
   created_at: string
   updated_at: string,
-  author: number
+  author: number,
+  tags: Array<string>
 }
 
 export const useStorePosts = defineStore('storePosts', {

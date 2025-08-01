@@ -1,27 +1,25 @@
 <template>
   <div class="min-h-screen flex items-start justify-center p-4 bg-gray-50">
     <base-card class="w-full max-w-2xl" title="Edit Post">
-      <n-tag class="mb-4" :type="published ? 'success' : 'warning'" size="small" round>
+      <base-tag class="mb-4" :type="published ? 'success' : 'warning'" size="small" round>
         {{ published ? 'Published' : 'Unpublished' }}
-      </n-tag>
+      </base-tag>
       <n-form>
         <n-form-item label="Title">
           <n-input v-model:value="title" placeholder="Post title..." />
         </n-form-item>
-        <n-button
+        <button
           v-if="!published"
-          type="primary"
           @click="handlePublishClicked"
         >
           Publish Post
-        </n-button>
-        <n-button
+        </button>
+        <button
           v-else
-          type="tertiary"
           @click="handleUnpublishClicked"
         >
           Unpublish Post
-        </n-button>
+        </button>
         <div class="my-2">
           <n-form-item label="Tags">
             <n-dynamic-tags v-model:value="tags" />
@@ -33,15 +31,14 @@
         </n-form-item>
         <div class="flex justify-end gap-2 mt-4">
           <router-link to="/posts">
-            <n-button>Cancel</n-button>
+            <button>Cancel</button>
           </router-link>
-          <n-button
-            type="primary"
+          <button
             :disabled="!title || !content"
             @click="handleUpdateClicked"
           >
             Update Post
-          </n-button>
+          </button>
         </div>
       </n-form>
     </base-card>
@@ -52,9 +49,10 @@
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { fetchPostById, publishPost, unpublishPost, updatePost } from '@/api/posts'
-import { NForm, NFormItem, NInput, NButton, NTag } from 'naive-ui'
+import { NForm, NFormItem, NInput } from 'naive-ui'
 import TextEditor from '@/components/TextEditor.vue'
 import BaseCard from '@/components/BaseCard.vue'
+import BaseTag from '@/components/BaseTag.vue'
 
 const route = useRoute()
 const router = useRouter()

@@ -1,46 +1,45 @@
 <template>
   <main class="p-6 max-w-3xl mx-auto">
-    <n-space vertical size="large">
-      <base-card
-        v-for="post in storePosts.userPosts"
-        :key="post.id"
-        :title="post.title"
-        class="shadow-md"
-      >
-        <n-tag class="mb-4" :type="post.published ? 'success' : 'warning'" size="small" round>
-          {{ post.published ? 'Published' : 'Unpublished' }}
-        </n-tag>
-        <div class="my-2">
-          <n-tag type="info" size="small" round v-for="tag in post.tags" class="mr-2 mb-2">{{ tag }}</n-tag>
+    <base-card
+      v-for="post in storePosts.userPosts"
+      :key="post.id"
+      :title="post.title"
+      class="shadow-md"
+    >
+      <n-tag class="mb-4" :type="post.published ? 'success' : 'warning'" size="small" round>
+        {{ post.published ? 'Published' : 'Unpublished' }}
+      </n-tag>
+      <div class="my-2">
+        <base-tag type="info" size="small" round v-for="(tag, idx) in post.tags" :key="idx" class="mr-2 mb-2">{{ tag }}</base-tag>
+      </div>
+      <div class="text-gray-700 cursor-pointer mb-4" @click="goToBlogDetail(post.id)">
+        <div>{{ getExcerpt(post.content) }}</div>
+        <div>Created: {{formatDate(post.created_at)}}</div>
+        <div>Author: {{post.author}}</div>
+      </div>
+      <div class="flex space-x-2">
+        <div>
+          <button @click="goToBlogEdit(post.id)">Edit</button>
         </div>
-        <div class="text-gray-700 cursor-pointer mb-4" @click="goToBlogDetail(post.id)">
-          <div>{{ getExcerpt(post.content) }}</div>
-          <div>Created: {{formatDate(post.created_at)}}</div>
-          <div>Author: {{post.author}}</div>
+        <div>
+          <button @click="() => handleDeleteClicked(post.id)">
+            Delete
+          </button>
         </div>
-        <div class="flex space-x-2">
-          <div>
-            <n-button @click="goToBlogEdit(post.id)" type="primary">Edit</n-button>
-          </div>
-          <div>
-            <n-button type="error" ghost @click="() => handleDeleteClicked(post.id)">
-              Delete
-            </n-button>
-          </div>
-        </div>
-      </base-card>
-    </n-space>
+      </div>
+    </base-card>
   </main>
 </template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useStorePosts } from '@/stores/storePosts'
-import { NH1, NCard, NSpace, NTag, NButton } from 'naive-ui'
+import { NTag } from 'naive-ui'
 import { useRouter } from 'vue-router'
 import DOMPurify from 'dompurify'
 import { formatDate } from '@/utils/prettyText'
 import BaseCard from '@/components/BaseCard.vue'
+import BaseTag from '@/components/BaseTag.vue'
 
 const storePosts = useStorePosts()
 const router = useRouter()
@@ -60,7 +59,7 @@ function getExcerpt(content: string, length = 100) {
   return clean.length > length ? clean.slice(0, length) + '…' : clean
 }
 
-const handleDeleteClicked = async (id: string) => {
+const handleDeleteClicked = async (id: number) => {
   await storePosts.deletePost(Number(id))
 }
 

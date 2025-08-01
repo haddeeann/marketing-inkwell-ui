@@ -33,7 +33,8 @@ interface Post {
   title: string
   content: string,
   published: boolean
-  author_id: number
+  author_id: number,
+  tags: Array<string>
 }
 
 const router = useRouter()
