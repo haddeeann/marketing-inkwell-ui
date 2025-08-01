@@ -1,41 +1,39 @@
 <template>
   <main class="p-6 max-w-3xl mx-auto">
-    <n-space vertical size="large">
-      <n-h1>{{ post?.title }}</n-h1>
-      <n-tag class="mb-4" :type="post?.published ? 'success' : 'warning'" size="small" round>
-        {{ post?.published ? 'Published' : 'Unpublished' }}
-      </n-tag>
-      <n-button
-        v-if="isLoggedIn && post.author_id === storeAuth.user.id"
-        @click="goToBlogEdit(post.id)"
-        type="primary"
+    <div v-if="post">
+      <h1>{{ post.title }}</h1>
+      <base-tag class="mb-4" :type="post.published ? 'success' : 'warning'" size="small" round>
+        {{ post.published ? 'Published' : 'Unpublished' }}
+      </base-tag>
+      <button
+        v-if="isLoggedIn && post.author_id === storeAuth.user?.id"
+        @click="goToBlogEdit()"
       >
         Edit
-      </n-button>
-
+      </button>
       <div
-        v-if="post"
         class="prose max-w-none text-gray-800"
         v-html="sanitize(post.content)"
       />
-      <n-empty v-else description="Loading..." />
-    </n-space>
+    </div>
+    <div v-else>Loading...</div>
   </main>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { NH1, NSpace, NEmpty, NTag, NButton } from 'naive-ui'
 import DOMPurify from 'dompurify'
 import { fetchPostById } from '@/api/posts'
 import { useStoreAuth } from '@/stores/storeAuth'
+import BaseTag from '@/components/BaseTag.vue'
 
 interface Post {
   id: number
   title: string
   content: string,
   published: boolean
+  author_id: number
 }
 
 const router = useRouter()
@@ -43,14 +41,14 @@ const route = useRoute()
 const post = ref<Post | null>(null)
 
 const storeAuth = useStoreAuth()
-const isLoggedIn = computed(() => !!storeAuth.accessToken)
+const isLoggedIn = computed(() => storeAuth.user !== null)
 
 
 function sanitize(content: string) {
   return DOMPurify.sanitize(content)
 }
 
-function editPost() {
+function goToBlogEdit() {
   router.push({ name: 'PostEdit', params: { id: post.value?.id }})
 }
 
