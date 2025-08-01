@@ -39,7 +39,7 @@ export default defineComponent({
   },
   emits: ['click'],
   setup(props, { emit }) {
-    const baseClasses = 'inline-flex items-center justify-center font-medium rounded'
+    const baseClasses = 'inline-flex items-center justify-center font-medium rounded my-4'
 
     const typeClasses = computed(() => {
       switch (props.type) {

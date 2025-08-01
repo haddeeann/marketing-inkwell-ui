@@ -19,12 +19,12 @@
       </div>
       <div class="flex space-x-2">
         <div>
-          <button @click="goToBlogEdit(post.id)">Edit</button>
+          <base-button type="primary" @click="goToBlogEdit(post.id)">Edit</base-button>
         </div>
         <div>
-          <button @click="() => handleDeleteClicked(post.id)">
+          <base-button type="warning" @click="() => handleDeleteClicked(post.id)">
             Delete
-          </button>
+          </base-button>
         </div>
       </div>
     </base-card>
@@ -39,6 +39,7 @@ import DOMPurify from 'dompurify'
 import { formatDate } from '@/utils/prettyText'
 import BaseCard from '@/components/BaseCard.vue'
 import BaseTag from '@/components/BaseTag.vue'
+import BaseButton from '@/components/BaseButton.vue'
 
 const storePosts = useStorePosts()
 const router = useRouter()

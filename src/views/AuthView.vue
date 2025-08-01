@@ -11,9 +11,9 @@
           <input id="password" v-model="credentials.password" type="text" placeholder="Enter your password">
         </div>
 
-        <button @click="onSubmit">
+        <base-button type="primary" @click="onSubmit">
           Login
-        </button>
+        </base-button>
       </form>
     </base-card>
   </div>
@@ -23,6 +23,7 @@
 import { ref, reactive } from 'vue'
 import { useStoreAuth } from '@/stores/storeAuth'
 import BaseCard from '@/components/BaseCard.vue'
+import BaseButton from '@/components/BaseButton.vue'
 
 const credentials = reactive({
   username: '',
