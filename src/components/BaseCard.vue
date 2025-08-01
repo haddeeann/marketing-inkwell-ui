@@ -68,7 +68,7 @@ const isBordered = props.bordered ?? true
 const isHoverable = props.hoverable ?? false
 
 // Base styling
-const baseClasses = 'bg-white rounded-2l shadow'
+const baseClasses = 'bg-white rounded-2l shadow my-6'
 
 // Size-based padding & font-size
 const sizeClasses = computed(() => {

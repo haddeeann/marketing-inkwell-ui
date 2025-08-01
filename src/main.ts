@@ -7,7 +7,6 @@ import piniaPluginRouter from 'pinia-plugin-router'
 import App from './App.vue'
 import router from './router'
 import { markRaw } from 'vue'
-import naive from 'naive-ui'
 
 
 const app = createApp(App)
@@ -18,7 +17,6 @@ pinia.use(({ store }) => {
 pinia.use(piniaPluginRouter(router))
 app.use(pinia)
 app.use(router)
-app.use(naive)
 
 app.directive('autofocus', vAutofocus)
 

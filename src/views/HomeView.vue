@@ -9,7 +9,7 @@
     >
       <div class="text-gray-700">
         <div class="my-2">
-          <n-tag type="info" size="small" round v-for="tag in post.tags" class="mr-2 mb-2">{{ tag }}</n-tag>
+          <base-tag type="info" size="small" round v-for="(tag, idx) in post.tags" :key="idx" class="mr-2 mb-2">{{ tag }}</base-tag>
         </div>
         <div>{{ getExcerpt(post.content) }}</div>
         <div>Created: {{formatDate(post.created_at)}}</div>
@@ -22,11 +22,11 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useStorePosts } from '@/stores/storePosts'
-import { NSpace, NTag } from 'naive-ui'
 import { useRouter } from 'vue-router'
 import { formatDate } from '@/utils/prettyText'
 import DOMPurify from 'dompurify'
 import BaseCard from '@/components/BaseCard.vue'
+import BaseTag from '@/components/BaseTag.vue'
 
 const storePosts = useStorePosts()
 const router = useRouter()

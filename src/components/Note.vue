@@ -1,5 +1,5 @@
 <template>
-  <card :title="formatDate(note.date)" class="mb-4 shadow-sm">
+  <base-card :title="formatDate(note.date)" class="mb-4 shadow-sm">
     <div class="text-base pb-4 whitespace-pre-wrap">
       {{ note.content }}
     </div>
@@ -11,20 +11,20 @@
     <template #action>
       <div class="flex space-x-2">
         <RouterLink :to="`/editNote/${note.id}`">
-          <n-button type="primary" size="small">Edit</n-button>
+          <button>Edit</button>
         </RouterLink>
-        <n-button type="error" ghost size="small" @click="storeNotes.deleteNote(note.id)">
+        <button @click="storeNotes.deleteNote(note.id)">
           Delete
-        </n-button>
+        </button>
       </div>
     </template>
-  </card>
+  </base-card>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useStoreNotes } from '@/stores/storeNotes'
-import { NCard, NButton } from 'naive-ui'
+import BaseCard from '@/components/BaseCard.vue'
 
 const storeNotes = useStoreNotes()
 
