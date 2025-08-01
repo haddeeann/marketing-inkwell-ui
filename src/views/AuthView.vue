@@ -1,20 +1,20 @@
 <template>
   <div class="min-h-screen flex items-center justify-center p-4 bg-gray-50">
-    <base-card class="w-full max-w-md" title="Take Note">
+    <base-card class="w-full max-w-md" title="Tiny Wordsmith">
+      <form @submit.prevent="onSubmit" class="mt-4">
+        <div>
+          <label for="username" class="mr-4">Username</label>
+          <input id="username" v-model="credentials.username" type="text" placeholder="you@example.com" />
+        </div>
+        <div>
+          <label for="password" class="mr-4">Password</label>
+          <input id="password" v-model="credentials.password" type="text" placeholder="Enter your password">
+        </div>
 
-      <n-form @submit.prevent="onSubmit" class="mt-4">
-        <n-form-item label="Username">
-          <n-input v-model:value="credentials.username" type="text" placeholder="you@example.com" />
-        </n-form-item>
-
-        <n-form-item label="Password">
-          <n-input v-model:value="credentials.password" type="password" placeholder="Enter your password" />
-        </n-form-item>
-
-        <n-button type="primary" block :loading="loading" @click="onSubmit">
+        <button @click="onSubmit">
           Login
-        </n-button>
-      </n-form>
+        </button>
+      </form>
     </base-card>
   </div>
 </template>
@@ -22,12 +22,6 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { useStoreAuth } from '@/stores/storeAuth'
-import {
-  NForm,
-  NFormItem,
-  NInput,
-  NButton,
-} from 'naive-ui'
 import BaseCard from '@/components/BaseCard.vue'
 
 const credentials = reactive({
