@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen p-6 bg-gray-50">
-    <card title="Take a Note" class="max-w-3xl mx-auto mb-6">
+    <base-card title="Take a Note" class="max-w-3xl mx-auto mb-6">
       <n-input
         v-model:value="newNote"
         type="textarea"
@@ -17,7 +17,7 @@
           Add Note
         </n-button>
       </div>
-    </card>
+    </base-card>
 
     <div class="max-w-3xl mx-auto space-y-4">
       <Note
@@ -38,7 +38,8 @@ import { ref, onMounted } from 'vue'
 import Note from '@/components/Note.vue'
 import { useStoreNotes } from '@/stores/storeNotes'
 import { useWatchCharacters } from '@/use/useWatchCharacters'
-import { NCard, NInput, NButton, NEmpty } from 'naive-ui'
+import { NInput, NButton, NEmpty } from 'naive-ui'
+import BaseCard from '@/components/BaseCard.vue'
 
 const storeNotes = useStoreNotes()
 const newNote = ref('')

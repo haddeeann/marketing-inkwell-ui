@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen flex items-center justify-center p-4 bg-gray-50">
-    <card class="w-full max-w-md" title="Take Note">
+    <base-card class="w-full max-w-md" title="Take Note">
 
       <n-form @submit.prevent="onSubmit" class="mt-4">
         <n-form-item label="Username">
@@ -15,25 +15,20 @@
           Login
         </n-button>
       </n-form>
-    </card>
+    </base-card>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive } from 'vue'
 import { useStoreAuth } from '@/stores/storeAuth'
 import {
-  NCard,
-  NTabs,
-  NTabPane,
   NForm,
   NFormItem,
   NInput,
   NButton,
 } from 'naive-ui'
-
-const tab = ref<'login' | 'register'>('login')
-const isRegister = computed(() => tab.value === 'register')
+import BaseCard from '@/components/BaseCard.vue'
 
 const credentials = reactive({
   username: '',

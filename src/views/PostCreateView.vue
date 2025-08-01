@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen flex items-start justify-center p-4 bg-gray-50">
-    <card class="w-full max-w-2xl" title="New Post">
+    <base-card class="w-full max-w-2xl" title="New Post">
       <n-form>
         <n-form-item label="Title">
           <n-input v-model:value="title" placeholder="Enter post title..." />
@@ -21,7 +21,7 @@
           </n-button>
         </div>
       </n-form>
-    </card>
+    </base-card>
   </div>
 </template>
 
@@ -29,8 +29,9 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { createPost } from '@/api/posts'
-import { NCard, NForm, NFormItem, NInput, NButton } from 'naive-ui'
+import { NForm, NFormItem, NInput, NButton } from 'naive-ui'
 import TextEditor from '@/components/TextEditor.vue'
+import BaseCard from '@/components/BaseCard.vue'
 
 const router = useRouter()
 

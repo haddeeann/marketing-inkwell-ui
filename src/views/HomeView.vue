@@ -1,33 +1,32 @@
 <template>
   <main class="p-6 max-w-3xl mx-auto">
-    <n-space vertical size="large">
-      <card
-        v-for="post in storePosts.publishedPosts"
-        :key="post.id"
-        :title="post.title"
-        class="shadow-md cursor-pointer"
-        @click="goToBlog(post.id)"
-      >
-        <div class="text-gray-700">
-          <div class="my-2">
-            <n-tag type="info" size="small" round v-for="tag in post.tags" class="mr-2 mb-2">{{ tag }}</n-tag>
-          </div>
-          <div>{{ getExcerpt(post.content) }}</div>
-          <div>Created: {{formatDate(post.created_at)}}</div>
-          <div>Author: {{post.author}}</div>
+    <base-card
+      v-for="post in storePosts.publishedPosts"
+      :key="post.id"
+      :title="post.title"
+      class="shadow-md cursor-pointer"
+      @click="goToBlog(post.id)"
+    >
+      <div class="text-gray-700">
+        <div class="my-2">
+          <n-tag type="info" size="small" round v-for="tag in post.tags" class="mr-2 mb-2">{{ tag }}</n-tag>
         </div>
-      </card>
-    </n-space>
+        <div>{{ getExcerpt(post.content) }}</div>
+        <div>Created: {{formatDate(post.created_at)}}</div>
+        <div>Author: {{post.author}}</div>
+      </div>
+    </base-card>
   </main>
 </template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useStorePosts } from '@/stores/storePosts'
-import { NCard, NSpace, NTag } from 'naive-ui'
+import { NSpace, NTag } from 'naive-ui'
 import { useRouter } from 'vue-router'
 import { formatDate } from '@/utils/prettyText'
 import DOMPurify from 'dompurify'
+import BaseCard from '@/components/BaseCard.vue'
 
 const storePosts = useStorePosts()
 const router = useRouter()

@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen p-6 bg-gray-50">
-    <card class="max-w-2xl mx-auto" title="📊 Numbers for Nerds">
+    <base-card class="max-w-2xl mx-auto" title="📊 Numbers for Nerds">
       <n-table :single-line="false" class="mb-6">
         <thead>
         <tr>
@@ -29,7 +29,7 @@
       <n-text depth="3" class="block mt-2 text-sm italic">
         Go ahead, say something nice. We’ll watch the characters as you type.
       </n-text>
-    </card>
+    </base-card>
   </div>
 </template>
 
@@ -37,7 +37,8 @@
 import { ref } from 'vue'
 import { useStoreNotes } from '@/stores/storeNotes'
 import { useWatchCharacters } from '@/use/useWatchCharacters'
-import { NCard, NTable, NInput, NText } from 'naive-ui'
+import { NTable, NInput, NText } from 'naive-ui'
+import BaseCard from '@/components/BaseCard.vue'
 
 const storeNotes = useStoreNotes()
 const loveTakeNote = ref('')

@@ -1,7 +1,7 @@
 <template>
   <main class="p-6 max-w-3xl mx-auto">
     <n-space vertical size="large">
-      <card
+      <base-card
         v-for="post in storePosts.userPosts"
         :key="post.id"
         :title="post.title"
@@ -28,7 +28,7 @@
             </n-button>
           </div>
         </div>
-      </card>
+      </base-card>
     </n-space>
   </main>
 </template>
@@ -40,6 +40,7 @@ import { NH1, NCard, NSpace, NTag, NButton } from 'naive-ui'
 import { useRouter } from 'vue-router'
 import DOMPurify from 'dompurify'
 import { formatDate } from '@/utils/prettyText'
+import BaseCard from '@/components/BaseCard.vue'
 
 const storePosts = useStorePosts()
 const router = useRouter()

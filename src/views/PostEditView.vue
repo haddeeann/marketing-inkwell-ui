@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen flex items-start justify-center p-4 bg-gray-50">
-    <card class="w-full max-w-2xl" title="Edit Post">
+    <base-card class="w-full max-w-2xl" title="Edit Post">
       <n-tag class="mb-4" :type="published ? 'success' : 'warning'" size="small" round>
         {{ published ? 'Published' : 'Unpublished' }}
       </n-tag>
@@ -44,7 +44,7 @@
           </n-button>
         </div>
       </n-form>
-    </card>
+    </base-card>
   </div>
 </template>
 
@@ -52,8 +52,9 @@
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { fetchPostById, publishPost, unpublishPost, updatePost } from '@/api/posts'
-import { NCard, NForm, NFormItem, NInput, NButton, NTag } from 'naive-ui'
+import { NForm, NFormItem, NInput, NButton, NTag } from 'naive-ui'
 import TextEditor from '@/components/TextEditor.vue'
+import BaseCard from '@/components/BaseCard.vue'
 
 const route = useRoute()
 const router = useRouter()

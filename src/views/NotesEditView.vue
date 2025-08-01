@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen flex items-start justify-center p-4 bg-gray-50">
-    <card class="w-full max-w-2xl" title="Edit Note">
+    <base-card class="w-full max-w-2xl" title="Edit Note">
       <n-form>
 
         {{ noteContent }}
@@ -25,7 +25,7 @@
           </n-button>
         </div>
       </n-form>
-    </card>
+    </base-card>
   </div>
 </template>
 
@@ -34,12 +34,12 @@ import { ref } from 'vue'
 import { useStoreNotes } from '@/stores/storeNotes'
 import { useRoute, useRouter } from 'vue-router'
 import {
-  NCard,
   NForm,
   NFormItem,
   NInput,
   NButton
 } from 'naive-ui'
+import BaseCard from '@/components/BaseCard.vue'
 
 const route = useRoute()
 const router = useRouter()
