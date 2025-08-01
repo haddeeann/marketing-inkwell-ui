@@ -1,5 +1,2 @@
-@tailwind base;       /* → Preflight reset + sensible typography defaults */
-@tailwind components; /* → any component-level styles/plugins */
-@tailwind utilities;  /* → all your utility classes (text-2xl, etc.) */
-
+@import "tailwindcss";
 

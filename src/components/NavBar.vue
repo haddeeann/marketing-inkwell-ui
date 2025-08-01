@@ -20,14 +20,20 @@
       <div v-if="storeAuth.user">
         Hello, {{ storeAuth.user.username }}
       </div>
-      <button
+      <base-button
+        type="primary"
+        size="large"
         v-if="storeAuth.user"
-        @click="storeAuth.logOutUser"
-      >
-        Log Out
-      </button>
+        @click="storeAuth.logOutUser">
+        Sign Out
+      </base-button>
       <RouterLink v-else to="/auth">
-        <button>Sign In</button>
+        <base-button
+          type="primary"
+          size="large"
+        >
+          Sign In
+        </base-button>
       </RouterLink>
     </div>
   </div>
@@ -36,6 +42,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { useStoreAuth } from '@/stores/storeAuth'
+import BaseButton from '@/components/BaseButton.vue'
 
 const storeAuth = useStoreAuth()
 </script>

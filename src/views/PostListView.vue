@@ -6,9 +6,9 @@
       :title="post.title"
       class="shadow-md"
     >
-      <n-tag class="mb-4" :type="post.published ? 'success' : 'warning'" size="small" round>
+      <base-tag class="mb-4" :type="post.published ? 'success' : 'warning'" size="small" round>
         {{ post.published ? 'Published' : 'Unpublished' }}
-      </n-tag>
+      </base-tag>
       <div class="my-2">
         <base-tag type="info" size="small" round v-for="(tag, idx) in post.tags" :key="idx" class="mr-2 mb-2">{{ tag }}</base-tag>
       </div>
@@ -34,7 +34,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useStorePosts } from '@/stores/storePosts'
-import { NTag } from 'naive-ui'
 import { useRouter } from 'vue-router'
 import DOMPurify from 'dompurify'
 import { formatDate } from '@/utils/prettyText'
