@@ -8,7 +8,7 @@
         </div>
         <div>
           <label for="password" class="mr-4">Password</label>
-          <input id="password" v-model="credentials.password" type="text" placeholder="Enter your password">
+          <input id="password" v-model="credentials.password" type="password" placeholder="Enter your password">
         </div>
 
         <base-button type="primary" @click="onSubmit">

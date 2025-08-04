@@ -1,19 +1,21 @@
 <template>
   <div class="p-4 bg-white shadow flex justify-between items-center">
     <div class="flex space-x-4" >
-      <template v-if="storeAuth.user">
+      <div>
         <RouterLink to="/" active-class="text-primary font-bold">Home</RouterLink>
-        <span class="px-1">|</span>
-        <RouterLink to="/posts" active-class="text-primary font-bold">Posts</RouterLink>
-        <span class="px-1">|</span>
-        <RouterLink to="/posts/new" active-class="text-primary font-bold">New Post</RouterLink>
-        <span class="px-1">|</span>
-        <RouterLink to="/notes" active-class="text-primary font-bold">Notes</RouterLink>
-        <span class="px-1">|</span>
-        <RouterLink to="/stats" active-class="text-primary font-bold">Stats</RouterLink>
+        <div v-if="storeAuth.user">
+          <span class="px-1">|</span>
+          <RouterLink to="/posts" active-class="text-primary font-bold">Posts</RouterLink>
+          <span class="px-1">|</span>
+          <RouterLink to="/posts/new" active-class="text-primary font-bold">New Post</RouterLink>
+          <span class="px-1">|</span>
+          <RouterLink to="/notes" active-class="text-primary font-bold">Notes</RouterLink>
+          <span class="px-1">|</span>
+          <RouterLink to="/stats" active-class="text-primary font-bold">Stats</RouterLink>
+        </div>
         <span class="px-1">|</span>
         <RouterLink to="/about" active-class="text-primary font-bold">About</RouterLink>
-      </template>
+      </div>
     </div>
 
     <div class="flex items-center space-x-4">
