@@ -64,10 +64,9 @@ const router = createRouter({
 
 router.beforeEach(async (to) => {
   const storeAuth = useStoreAuth()
-  const hasToken = !!localStorage.getItem('access')
-  if (!hasToken && !storeAuth.user && to.name !== 'auth' && to.name !== 'home') {
+  if (!storeAuth.user && to.name !== 'auth' && to.name !== 'home' && to.name !== 'about') {
     return {
-      name: 'auth',
+      name: 'home',
     }
   }
   if (storeAuth.user && to.name === 'auth') {
