@@ -3,7 +3,7 @@
     <div class="flex space-x-4" >
       <div>
         <RouterLink to="/" active-class="text-primary font-bold">Home</RouterLink>
-        <div v-if="storeAuth.user">
+        <span v-if="storeAuth.user">
           <span class="px-1">|</span>
           <RouterLink to="/posts" active-class="text-primary font-bold">Posts</RouterLink>
           <span class="px-1">|</span>
@@ -12,7 +12,7 @@
           <RouterLink to="/notes" active-class="text-primary font-bold">Notes</RouterLink>
           <span class="px-1">|</span>
           <RouterLink to="/stats" active-class="text-primary font-bold">Stats</RouterLink>
-        </div>
+        </span>
         <span class="px-1">|</span>
         <RouterLink to="/about" active-class="text-primary font-bold">About</RouterLink>
       </div>
