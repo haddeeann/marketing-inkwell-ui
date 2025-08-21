@@ -1,18 +1,28 @@
 <template>
   <div class="min-h-screen flex items-center justify-center p-4 bg-gray-50">
     <base-card class="w-full max-w-md" title="Tiny Wordsmith">
-      <form @submit.prevent="onSubmit" class="mt-4">
-        <div>
-          <label for="username" class="mr-4">Username</label>
-          <input id="username" v-model="credentials.username" type="text" placeholder="you@example.com" />
-        </div>
-        <div>
-          <label for="password" class="mr-4">Password</label>
-          <input id="password" v-model="credentials.password" type="password" placeholder="Enter your password">
-        </div>
+      <form @submit.prevent="onSubmit" class="mt-4 space-y-4">
+        <BaseInput
+          id="username"
+          label="Username"
+          v-model="credentials.username"
+          type="text"
+          placeholder="you@example.com"
+          autocomplete="username"
+        />
 
-        <base-button type="primary" @click="onSubmit">
-          Login
+        <BaseInput
+          id="password"
+          label="Password"
+          v-model="credentials.password"
+          type="password"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          :error="passwordError"
+        />
+
+        <base-button :disabled="loading" type="primary" @click="onSubmit">
+          {{ loading ? 'Logging in…' : 'Login' }}
         </base-button>
       </form>
     </base-card>
@@ -20,10 +30,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { useStoreAuth } from '@/stores/storeAuth'
 import BaseCard from '@/components/BaseCard.vue'
 import BaseButton from '@/components/BaseButton.vue'
+import BaseInput from '@/components/BaseInput.vue'
 
 const credentials = reactive({
   username: '',
@@ -33,12 +44,16 @@ const credentials = reactive({
 const storeAuth = useStoreAuth()
 const loading = ref(false)
 
+const passwordError = computed(() =>
+  credentials.password.length === 0 ? '' :
+    credentials.password.length < 8 ? 'Password must be at least 8 characters.' : ''
+)
+
 const onSubmit = async () => {
   if (!credentials.username || !credentials.password) {
     alert('Please enter an email and password')
     return
   }
-
   loading.value = true
   try {
     await storeAuth.logInUser(credentials)
