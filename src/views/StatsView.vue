@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen p-6 bg-gray-50">
+  <div class="min-h-screen p-6">
     <base-card class="max-w-4xl mx-auto" title="📊 Numbers for Nerds">
       <table class="mb-6">
         <thead>
