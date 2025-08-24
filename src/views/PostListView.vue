@@ -4,7 +4,6 @@
       v-for="post in storePosts.userPosts"
       :key="post.id"
       :title="post.title"
-      class="shadow-md"
     >
       <base-tag class="mb-4" :type="post.published ? 'success' : 'warning'" size="small" round>
         {{ post.published ? 'Published' : 'Unpublished' }}

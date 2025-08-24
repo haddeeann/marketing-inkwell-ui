@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen flex items-start justify-center p-4 bg-gray-50">
-    <base-card class="w-full max-w-2xl" title="Edit Note">
+    <base-card title="Edit Note">
       <form>
         {{ noteContent }}
         <label for="noteContent">Note Content</label>

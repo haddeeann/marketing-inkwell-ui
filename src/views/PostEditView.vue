@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen flex items-start justify-center p-4 bg-gray-50">
-    <base-card class="w-full max-w-2xl" title="Edit Post">
+    <base-card title="Edit Post">
       <base-tag class="mb-4" :type="published ? 'success' : 'warning'" size="small" round>
         {{ published ? 'Published' : 'Unpublished' }}
       </base-tag>
