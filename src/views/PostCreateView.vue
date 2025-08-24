@@ -1,10 +1,10 @@
 <template>
-  <div class="min-h-screen flex items-start justify-center p-4 bg-gray-50">
-    <base-card class="w-full max-w-2xl" title="New Post">
+  <div class="min-h-screen flex items-start justify-center p-4">
+    <base-card class="w-full max-w-4xl" title="New Post">
       <form @submit.prevent="handleCreateClicked" class="mt-4 space-y-4">
         <!-- Title -->
         <div>
-          <label for="post-title" class="block text-sm font-medium text-gray-700">
+          <label for="post-title" class="block text-sm font-medium">
             Title
           </label>
           <input
@@ -18,7 +18,7 @@
 
         <!-- Content -->
         <div>
-          <label for="post-content" class="block text-sm font-medium text-gray-700">
+          <label for="post-content" class="block text-sm font-medium">
             Content
           </label>
           <!-- Keep your rich editor here -->

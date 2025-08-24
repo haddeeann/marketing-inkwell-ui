@@ -1,5 +1,5 @@
 <template>
-  <main class="p-6 max-w-3xl mx-auto">
+  <main class="p-6 max-w-4xl mx-auto">
     <base-card
       v-for="post in storePosts.publishedPosts"
       :key="post.id"
