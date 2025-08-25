@@ -1,5 +1,5 @@
 <template>
-  <main class="p-6 max-w-4xl mx-auto">
+  <main>
     <div v-if="post">
       <h1>{{ post.title }}</h1>
       <base-tag class="mb-4" :type="post.published ? 'success' : 'warning'" size="small" round>

@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen p-6">
-    <base-card title="Take a Note" class="max-w-4xl mx-auto mb-6">
+    <base-card title="Take a Note">
       <textarea
         v-model="newNote"
         type="textarea"
@@ -18,7 +18,7 @@
       </div>
     </base-card>
 
-    <div class="max-w-4xl mx-auto space-y-4">
+    <div>
       <Note
         v-for="note in storeNotes.notes"
         :key="note.id"

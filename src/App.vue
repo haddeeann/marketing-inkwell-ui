@@ -5,7 +5,10 @@
         <NavBar />
       </div>
     </header>
-    <RouterView />
+    <div class="mx-4">
+      <RouterView />
+    </div>
+
   </div>
 </template>
 
