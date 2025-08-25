@@ -132,6 +132,7 @@ import TextStyle from '@tiptap/extension-text-style'
 import Color from '@tiptap/extension-color'
 import ListItem from '@tiptap/extension-list-item'
 import { watch } from 'vue'
+import { Extension } from '@tiptap/core'
 
 // Accept v-model binding
 const props = defineProps<{
@@ -144,11 +145,21 @@ const emit = defineEmits<{
 
 const headingLevels = [1, 2, 3, 4, 5, 6] as const
 
+const StrikeShortcut = Extension.create({
+  name: 'strikeShortcut',
+  addKeyboardShortcuts() {
+    return {
+      'Mod-Shift-x': () => this.editor.chain().focus().toggleStrike().run(),
+    }
+  },
+})
+
 // Initialize the editor
 const editor = useEditor({
   content: props.modelValue,
   extensions: [
     StarterKit,
+    StrikeShortcut,
     TextStyle.configure({ types: [ListItem.name] }),
     Color.configure({ types: [TextStyle.name, ListItem.name] }),
   ],
@@ -156,6 +167,10 @@ const editor = useEditor({
     emit('update:modelValue', editor.getHTML())
   },
 })
+
+
+
+
 
 // Watch for changes to modelValue and update the editor content
 watch(
@@ -214,4 +229,9 @@ div[contenteditable="true"] {
   border-radius: 0.25rem;
   padding: 0.2em 0.4em;
 }
+
+.tiptap strong { font-weight: 700; }
+.tiptap em { font-style: italic; }
+.tiptap s { text-decoration: line-through; } /* or .tiptap del */
+
 </style>
