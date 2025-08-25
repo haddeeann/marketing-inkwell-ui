@@ -1,121 +1,139 @@
 <template>
   <div v-if="editor" class="tiptap">
     <div class="flex flex-wrap gap-2">
-      <n-button
+      <base-button
         size="small"
-        :type="editor.isActive('bold') ? 'primary' : 'default'"
+        :type="fmt.bold ? 'primary' : 'default'"
         @click="editor.chain().focus().toggleBold().run()"
+
       >
         Bold
-      </n-button>
-      <n-button
+      </base-button>
+      <base-button
         size="small"
-        :type="editor.isActive('italic') ? 'primary' : 'default'"
+        :type="fmt.italic ? 'primary' : 'default'"
         @click="editor.chain().focus().toggleItalic().run()"
       >
         Italic
-      </n-button>
-      <n-button
+      </base-button>
+      <base-button
         size="small"
-        :type="editor.isActive('strike') ? 'primary' : 'default'"
+        :type="fmt.strike ? 'primary' : 'default'"
         @click="editor.chain().focus().toggleStrike().run()"
       >
         Strike
-      </n-button>
-      <n-button
+      </base-button>
+      <!-- inline mark -->
+      <base-button
         size="small"
         :type="editor.isActive('code') ? 'primary' : 'default'"
+        :aria-pressed="editor.isActive('code')"
         @click="editor.chain().focus().toggleCode().run()"
       >
         Code
-      </n-button>
-      <n-button size="small" @click="editor.chain().focus().unsetAllMarks().run()">
+      </base-button>
+
+      <!-- clearers (not toggles) -->
+      <base-button size="small" @click="editor.chain().focus().unsetAllMarks().run()">
         Clear Marks
-      </n-button>
-      <n-button size="small" @click="editor.chain().focus().clearNodes().run()">
+      </base-button>
+      <base-button size="small" @click="editor.chain().focus().clearNodes().run()">
         Clear Nodes
-      </n-button>
-      <n-button size="small" @click="editor.chain().focus().setParagraph().run()">
+      </base-button>
+
+      <!-- paragraph toggle -->
+      <base-button
+        size="small"
+        :type="editor.isActive('paragraph') ? 'primary' : 'default'"
+        :aria-pressed="editor.isActive('paragraph')"
+        @click="editor.chain().focus().setParagraph().run()"
+      >
         Paragraph
-      </n-button>
-      <n-button
+      </base-button>
+
+      <!-- headings -->
+      <base-button
         v-for="level in headingLevels"
         :key="level"
-        @click="editor.chain().focus().toggleHeading({ level }).run()"
+        size="small"
         :type="editor.isActive('heading', { level }) ? 'primary' : 'default'"
+        :aria-pressed="editor.isActive('heading', { level })"
+        @click="editor.chain().focus().toggleHeading({ level }).run()"
       >
         H{{ level }}
-      </n-button>
+      </base-button>
 
-      <n-button
+      <!-- lists -->
+      <base-button
         size="small"
         :type="editor.isActive('bulletList') ? 'primary' : 'default'"
+        :aria-pressed="editor.isActive('bulletList')"
         @click="editor.chain().focus().toggleBulletList().run()"
       >
         Bullet List
-      </n-button>
+      </base-button>
 
-      <n-button
+      <base-button
         size="small"
         :type="editor.isActive('orderedList') ? 'primary' : 'default'"
+        :aria-pressed="editor.isActive('orderedList')"
         @click="editor.chain().focus().toggleOrderedList().run()"
       >
         Ordered List
-      </n-button>
+      </base-button>
 
-      <n-button
+      <!-- blocks -->
+      <base-button
         size="small"
         :type="editor.isActive('codeBlock') ? 'primary' : 'default'"
+        :aria-pressed="editor.isActive('codeBlock')"
         @click="editor.chain().focus().toggleCodeBlock().run()"
       >
         Code Block
-      </n-button>
+      </base-button>
 
-      <n-button
+      <base-button
         size="small"
         :type="editor.isActive('blockquote') ? 'primary' : 'default'"
+        :aria-pressed="editor.isActive('blockquote')"
         @click="editor.chain().focus().toggleBlockquote().run()"
       >
         Blockquote
-      </n-button>
+      </base-button>
 
-      <n-button
-        size="small"
-        @click="editor.chain().focus().setHorizontalRule().run()"
-      >
+      <!-- inserts (not toggles) -->
+      <base-button size="small" @click="editor.chain().focus().setHorizontalRule().run()">
         Horizontal Rule
-      </n-button>
-
-      <n-button
-        size="small"
-        @click="editor.chain().focus().setHardBreak().run()"
-      >
+      </base-button>
+      <base-button size="small" @click="editor.chain().focus().setHardBreak().run()">
         Hard Break
-      </n-button>
+      </base-button>
 
-      <n-button
+      <!-- history -->
+      <base-button
         size="small"
         :disabled="!editor.can().chain().focus().undo().run()"
         @click="editor.chain().focus().undo().run()"
       >
         Undo
-      </n-button>
-
-      <n-button
+      </base-button>
+      <base-button
         size="small"
         :disabled="!editor.can().chain().focus().redo().run()"
         @click="editor.chain().focus().redo().run()"
       >
         Redo
-      </n-button>
+      </base-button>
 
-      <n-button
+      <!-- color example -->
+      <base-button
         size="small"
         :type="editor.isActive('textStyle', { color: '#958DF1' }) ? 'primary' : 'default'"
+        :aria-pressed="editor.isActive('textStyle', { color: '#958DF1' })"
         @click="editor.chain().focus().setColor('#958DF1').run()"
       >
         Purple
-      </n-button>
+      </base-button>
     </div>
 
     <EditorContent
@@ -130,9 +148,9 @@ import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import TextStyle from '@tiptap/extension-text-style'
 import Color from '@tiptap/extension-color'
-import ListItem from '@tiptap/extension-list-item'
-import { watch } from 'vue'
+import { watch, reactive, onMounted, onBeforeUnmount } from 'vue'
 import { Extension } from '@tiptap/core'
+import BaseButton from '@/components/BaseButton.vue'
 
 // Accept v-model binding
 const props = defineProps<{
@@ -160,15 +178,25 @@ const editor = useEditor({
   extensions: [
     StarterKit,
     StrikeShortcut,
-    TextStyle.configure({ types: [ListItem.name] }),
-    Color.configure({ types: [TextStyle.name, ListItem.name] }),
+    TextStyle,
+    Color.configure({ types: ['textStyle'] }),
   ],
   onUpdate({ editor }) {
     emit('update:modelValue', editor.getHTML())
   },
 })
 
+// reactive “format bar” state
+const fmt = reactive({ bold: false, italic: false, strike: false, purple: false })
 
+const updateActive = () => {
+  const e = editor.value
+  if (!e) return
+  fmt.bold = e.isActive('bold')
+  fmt.italic = e.isActive('italic')
+  fmt.strike = e.isActive('strike')
+  fmt.purple = e.isActive('textStyle', { color: '#958DF1' }) // example w/ attributes
+}
 
 
 
@@ -181,6 +209,20 @@ watch(
     }
   }
 )
+
+onMounted(() => {
+  // selection moves, stored marks change, typing happens → keep buttons in sync
+  editor.value?.on('selectionUpdate', updateActive)
+  editor.value?.on('transaction', updateActive)
+  editor.value?.on('update', updateActive)
+  updateActive()
+})
+
+onBeforeUnmount(() => {
+  editor.value?.off('selectionUpdate', updateActive)
+  editor.value?.off('transaction', updateActive)
+  editor.value?.off('update', updateActive)
+})
 </script>
 
 
