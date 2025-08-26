@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
-import axios from '@/api/axios'
+import axios, { setTokens, clearTokens } from '@/api/axios'
+
 import { useStoreNotes } from '@/stores/storeNotes'
 
 type Credentials = {
@@ -15,7 +16,7 @@ export type User = {
 
 export const useStoreAuth = defineStore('storeAuth', {
   state: () => ({
-    user: null as User | null,
+    user: null as User | null
   }),
   getters: {
     isLoggedIn: (state) => !!state.user,
@@ -38,9 +39,7 @@ export const useStoreAuth = defineStore('storeAuth', {
 
         const access = res.data.access
         const refresh = res.data.refresh
-
-        localStorage.setItem('access', access)
-        localStorage.setItem('refresh', refresh)
+        setTokens(access, refresh)
 
         const userRes = await axios.get('/api/auth/current_user/')
         const userData = userRes.data
@@ -61,6 +60,7 @@ export const useStoreAuth = defineStore('storeAuth', {
     },
     logOutUser() {
       this.user = null
+      clearTokens()
       delete axios.defaults.headers.common['Authorization']
       this.router.replace('/auth')
       useStoreNotes().clearNotes()
