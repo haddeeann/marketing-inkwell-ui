@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div v-if="post">
+    <base-card v-if="post">
       <h1>{{ post.title }}</h1>
       <base-tag class="mb-4" :type="post.published ? 'success' : 'warning'" size="small" round>
         {{ post.published ? 'Published' : 'Unpublished' }}
@@ -16,7 +16,7 @@
         class="prose max-w-none text-gray-800"
         v-html="sanitize(post.content)"
       />
-    </div>
+    </base-card>
     <div v-else>Loading...</div>
   </main>
 </template>
@@ -29,6 +29,7 @@ import { fetchPostById } from '@/api/posts'
 import { useStoreAuth } from '@/stores/storeAuth'
 import BaseTag from '@/components/BaseTag.vue'
 import BaseButton from '@/components/BaseButton.vue'
+import BaseCard from '@/components/BaseCard.vue'
 
 interface Post {
   id: number

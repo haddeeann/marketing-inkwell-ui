@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen flex items-start justify-center">
-    <base-card title="New Post">
+  <div>
+    <base-card>
       <form @submit.prevent="handleCreateClicked" class="mt-4 space-y-4">
         <!-- Title -->
         <div>

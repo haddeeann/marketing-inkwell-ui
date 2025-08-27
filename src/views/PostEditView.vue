@@ -1,24 +1,29 @@
 <template>
-  <div class="min-h-screen flex items-start justify-center p-4 bg-gray-50">
-    <base-card title="Edit Post">
-      <base-tag class="mb-4" :type="published ? 'success' : 'warning'" size="small" round>
-        {{ published ? 'Published' : 'Unpublished' }}
-      </base-tag>
+  <div>
+    <base-card>
       <form>
         <label for="title"></label>
         <input type="text" v-model="title" placeholder="Post title...">
-        <button
-          v-if="!published"
-          @click="handlePublishClicked"
-        >
-          Publish Post
-        </button>
-        <button
-          v-else
-          @click="handleUnpublishClicked"
-        >
-          Unpublish Post
-        </button>
+
+        <div>
+          <base-button
+            v-if="!published"
+            type="primary"
+            :html-type="'button'"
+            @click="handlePublishClicked"
+          >
+            Publish Post
+          </base-button>
+          <base-button
+            type="secondary"
+            v-else
+            :html-type="'button'"
+            @click="handleUnpublishClicked"
+          >
+            Unpublish Post
+          </base-button>
+        </div>
+
         <div class="my-2">
           <label for="tags">Tags</label>
           <base-tags v-model="tags" />
@@ -29,14 +34,15 @@
         </div>
         <div class="flex justify-end gap-2 mt-4">
           <router-link to="/posts">
-            <button>Cancel</button>
+            <base-button type="warning">Cancel</base-button>
           </router-link>
-          <button
+          <base-button
+            type="primary"
             :disabled="!title || !content"
             @click="handleUpdateClicked"
           >
             Update Post
-          </button>
+          </base-button>
         </div>
       </form>
     </base-card>
@@ -49,8 +55,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { fetchPostById, publishPost, unpublishPost, updatePost } from '@/api/posts'
 import TextEditor from '@/components/TextEditor.vue'
 import BaseCard from '@/components/BaseCard.vue'
-import BaseTag from '@/components/BaseTag.vue'
 import BaseTags from '@/components/BaseTags.vue'
+import BaseButton from '@/components/BaseButton.vue'
 
 const route = useRoute()
 const router = useRouter()

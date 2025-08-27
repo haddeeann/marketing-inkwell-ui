@@ -34,7 +34,7 @@ export async function fetchPublishedPosts() {
 }
 
 // api/posts.ts
-export async function updatePost(id: number, data: { title: string; content: string }) {
+export async function updatePost(id: number, data: { title: string; content: string, tags: string[] }) {
   const res = await axios.put(`/api/posts/${id}/`, data)
   return res.data
 }

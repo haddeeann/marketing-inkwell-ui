@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center p-4 bg-gray-50">
+  <div>
     <base-card title="Tiny Wordsmith">
       <form @submit.prevent="onSubmit" class="mt-4 space-y-4">
         <BaseInput

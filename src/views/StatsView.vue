@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen p-6">
-    <base-card title="📊 Numbers for Nerds">
+  <div>
+    <base-card>
       <table class="mb-6">
         <thead>
         <tr>

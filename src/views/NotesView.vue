@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen p-6">
-    <base-card title="Take a Note">
+  <div>
+    <base-card>
       <textarea
         v-model="newNote"
         type="textarea"

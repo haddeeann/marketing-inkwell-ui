@@ -1,6 +1,6 @@
 <template>
-  <div style="padding: 24px">
-    <base-card title="About Me">
+  <div>
+    <base-card>
       <p>
         I'm a software developer with two dogs who loves hiking and nature. I started building websites in 2010 with a passion for blogging and designing my own online spaces. Over the years, that passion has grown into a career creating small utility software products and games.
       </p>
